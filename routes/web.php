@@ -23,5 +23,6 @@ Route::get('/company/{id}/{company}', 'CompanyController@index')->name('company.
 
 //user profile
 Route::get('/user/profile', 'UserProfileController@index');
+Route::post('/user/profile/create', 'UserProfileController@store')->name('profile.create');
 
 

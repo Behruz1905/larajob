@@ -36,12 +36,25 @@
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <input id="address" type="text" class="form-control" name="address" value="{{ Auth::user()->profile->address }}">
+                                    @if($errors->has('address'))
+                                        <div class="error" style="color:red">{{ $errors->first('address') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone_number">Phone number</label>
+                                    <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ Auth::user()->profile->phone_number }}">
+                                    @if($errors->has('phone_number'))
+                                    <div class="error" style="color:red">{{ $errors->first('phone_number') }}</div>
+                                @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="experience">Experience</label>
                                     <textarea name="experience" class="form-control" id="experience" cols="30" rows="10">
                                         {{ Auth::user()->profile->experience }}
                                     </textarea>
+                                    @if($errors->has('experience'))
+                                    <div class="error" style="color:red">{{ $errors->first('experience') }}</div>
+                                    @endif
 
                                 </div>
                                 <div class="form-group">
@@ -49,6 +62,9 @@
                                     <textarea name="bio" class="form-control" id="bio" cols="30" rows="10">
                                         {{ Auth::user()->profile->bio }}
                                     </textarea>
+                                    @if($errors->has('bio'))
+                                    <div class="error" style="color:red">{{ $errors->first('bio') }}</div>
+                                @endif
                                 </div>
 
                                 <div class="form-group">
@@ -76,6 +92,7 @@
                           <p>Name: {{ Auth::user()->name }}</p>
                           <p>Email: {{ Auth::user()->email }}</p>
                           <p>Address: {{ Auth::user()->profile->address }}</p>
+                          <p>Phone: {{ Auth::user()->profile->phone_number }}</p>
                           <p>Gender: {{ Auth::user()->profile->gender }}</p>
                           <p>Experience: {{ Auth::user()->profile->experience }}</p>
                           <p>Bio: {{ Auth::user()->profile->bio }}</p>

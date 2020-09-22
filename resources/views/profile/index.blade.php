@@ -3,10 +3,32 @@
 @section('content')
     <div class="container">
         <div class="row">
-                <div class="col-md-2">
-                    <img src="{{asset('avatar/avatar.jpg')}}" width="100" alt="">
+                <div class="col-md-3">
+                    @if(empty(Auth::user()->profile->avatar))
+                         <img src="{{asset('avatar/avatar.jpg')}}" width="100" style="width: 100%" alt="">
+                    @else
+                        <img src="{{asset('uploads/avatar')}}/{{Auth::user()->profile->avatar}}" width="100" style="width: 100%" alt="">
+                    @endif
+
+                    <br><br>
+                    <form action="{{route('avatar')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card">
+                            <div class="card-header">Update avatar
+
+                            </div>
+
+                            <div class="card-body">
+                                <input type="file" class="form-control" name="avatar">
+                                <br>
+                                <button class="btn btn-success float-right" type="submit">Update</button>
+                            </div>
+                        </div>
+                    </form>
+
+
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">Update your profile</div>
                         <form action="{{ route('profile.create') }}" method="POST" >@csrf
@@ -58,32 +80,52 @@
                           <p>Experience: {{ Auth::user()->profile->experience }}</p>
                           <p>Bio: {{ Auth::user()->profile->bio }}</p>
                           <p>Member On: {{ date('F d Y',strtotime(Auth::user()->created_at)) }}</p>
+
+                            @if(!empty(Auth::user()->profile->cover_letter))
+                                <p><a href="{{Storage::url(Auth::user()->profile->cover_letter)}}">Cover letter</a></p>
+                            @else
+                                <p>Please upload cover letter</p>
+                            @endif
+
+                            @if(!empty(Auth::user()->profile->resume))
+                                <p><a href="{{Storage::url(Auth::user()->profile->resume)}}">resume</a></p>
+                            @else
+                                <p>Please upload your resume</p>
+                            @endif
                         </div>
                     </div>
+                    <form action="{{route('cover.letter')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                    <div class="card">
-                        <div class="card-header">Update coverletter
+                            <div class="card">
+                                <div class="card-header">Update coverletter
 
-                        </div>
+                                </div>
 
-                        <div class="card-body">
-                           <input type="file" class="form-control" name="cover_letter">
-                           <br>
-                           <button class="btn btn-success float-right" type="submit">Update</button>
-                        </div>
-                    </div>
+                                <div class="card-body">
+                                   <input type="file" class="form-control" name="cover_letter">
+                                   <br>
+                                   <button class="btn btn-success float-right" type="submit">Update</button>
+                                </div>
+                            </div>
+                    </form>
+                    <br>
 
-                    <div class="card">
-                        <div class="card-header">Update resume
+                    <form action="{{route('resume')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                            <div class="card">
+                                <div class="card-header">Update resume
 
-                        </div>
+                                </div>
 
-                        <div class="card-body">
-                           <input type="file" class="form-control" name="resume">
-                           <br>
-                           <button class="btn btn-success float-right" type="submit">Update</button>
-                        </div>
-                    </div>
+                                <div class="card-body">
+                                   <input type="file" class="form-control" name="resume">
+                                   <br>
+                                   <button class="btn btn-success float-right" type="submit">Update</button>
+                                </div>
+                            </div>
+                    </form>
+
                 </div>
         </div>
     </div>

@@ -18,7 +18,9 @@ class UserProfileController extends Controller
             $this->validate($request, [
                 'address' => 'required',
                 'bio' => 'required|min:20',
-                'experience'=> 'required|min:20'
+                'experience'=> 'required|min:20',
+                'phone_number'=> 'required|regex:/^[0-9]{9,13}+$/',
+
             ]);
             $user_id = auth()->user()->id;
             Profile::where('user_id',$user_id)->update([
@@ -33,6 +35,10 @@ class UserProfileController extends Controller
 
     public function coverletter(Request $request)
     {
+        $this->validate($request, [
+            'cover_letter' => 'required|mimes:pdf,doc,docx|max:20000',
+        ]);
+
             $user_id = auth()->user()->id;
             $cover = $request->file('cover_letter')->store('public/files');
 
@@ -45,6 +51,10 @@ class UserProfileController extends Controller
 
     public function resume(Request $request)
     {
+        $this->validate($request, [
+            'resume' => 'required|mimes:pdf,doc,docx|max:20000',
+        ]);
+
             $user_id = auth()->user()->id;
             $resume = $request->file('resume')->store('public/files');
 
@@ -57,6 +67,10 @@ class UserProfileController extends Controller
 
     public function avatar(Request $request)
     {
+
+        $this->validate($request, [
+            'avatar' => 'required|mimes:jpg,JPG,png,jpeg|max:20000',
+        ]);
         $user_id = auth()->user()->id;
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');

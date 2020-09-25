@@ -14,7 +14,11 @@
 
                 <div class="company-desc">
                     <br>
-                    <img src="{{asset('avatar/avatar.jpg')}}"  width="100" alt="">
+                    @if(empty(Auth::user()->company->logo))
+                        <img src="{{asset('avatar/avatar.jpg')}}"  width="100" alt="">
+                    @else
+                        <img src="{{asset('uploads/logo')}}/{{Auth::user()->company->logo}}" width="100" alt="">
+                    @endif
                     <p>{{ $company->description }}</p>
                     <h1>{{$company->cname}}</h1>
                     <p><strong>Slogan-</strong>{{$company->slogan}}&nbsp;/

@@ -14,16 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'JobController@index');
+Route::get('/jobs/create','JobController@create')->name('job.create');
+Route::post('/jobs/create','JobController@store')->name('job.store');
+Route::get('/jobs/my-job','JobController@myJob')->name('jobs.myjob');
+Route::get('/jobs/{id}/edit','JobController@edit')->name('job.edit');
+Route::post('/jobs/{id}/edit','JobController@update')->name('job.update');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/jobs/{id}/{job}', 'JobController@show')->name('jobs.show');
+
+//Company routes
 Route::get('/company/{id}/{company}', 'CompanyController@index')->name('company.index');
 Route::get('/company/create', 'CompanyController@create')->name('company.create');
 Route::post ('/company/create', 'CompanyController@store')->name('company.store');
 Route::post ('/company/coverphoto', 'CompanyController@coverPhoto')->name('cover.photo');
 Route::post ('/company/logo', 'CompanyController@companylogo')->name('company.logo');
+
 //user profile
 Route::get('/user/profile', 'UserProfileController@index');
 Route::post('/user/profile/create', 'UserProfileController@store')->name('profile.create');

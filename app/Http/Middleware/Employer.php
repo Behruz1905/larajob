@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Employer
 {
@@ -15,6 +16,9 @@ class Employer
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::check()&&Auth::user()->user_type=='employer')
+             return $next($request);
+        else
+            return redirect('/');
     }
 }

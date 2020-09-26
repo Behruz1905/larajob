@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Auth;
 class Seeker
 {
     /**
@@ -15,6 +15,9 @@ class Seeker
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::check()&&Auth::user()->user_type=='seeker')
+             return $next($request);
+        else
+            return redirect('/');
     }
 }

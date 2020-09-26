@@ -9,10 +9,14 @@ use App\Http\Requests\JobPostRequest;
 use App\Job;
 use App\Category;
 use App\Company;
-
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('employer', ['except' => ['index','show','apply']]);
+    }
     public function  index()
     {
         $jobs = Job::all();
@@ -69,6 +73,19 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         return view('jobs.edit',compact('job'));
+    }
+
+    public function apply(Request $request,$id)
+    {
+        $jobId = Job::find($id);
+        $jobId->users()->attach(Auth::user()->id);
+        return redirect()->back()->with('message', 'Application sent successfully!');
+    }
+
+    public function applicant()
+    {
+        $applicants = Job::has('users')->where('user_id',auth()->user()->id)->get();
+        return view('jobs.applicants', compact('applicants'));
     }
 
 

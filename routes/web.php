@@ -19,7 +19,8 @@ Route::post('/jobs/create','JobController@store')->name('job.store');
 Route::get('/jobs/my-job','JobController@myJob')->name('jobs.myjob');
 Route::get('/jobs/{id}/edit','JobController@edit')->name('job.edit');
 Route::post('/jobs/{id}/edit','JobController@update')->name('job.update');
-Route::get('/jobs/applications','JobController@applicant');
+Route::get('/jobs/applications','JobController@applicant')->name('applicants');
+Route::get('/jobs/alljobs','JobController@allJobs')->name('alljobs');
 
 Auth::routes();
 

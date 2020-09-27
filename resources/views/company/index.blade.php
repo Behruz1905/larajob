@@ -5,19 +5,20 @@
         <div class="col-md-12">
             <div class="company-profile">
 
-                @if(empty(Auth::user()->company->cover_photo))
+                @if(empty($company->cover_photo))
+
                     <img src="{{asset('cover/cover.jpg')}}" style="width:100%" alt="">
                 @else
-                    <img src="{{asset('uploads/coverphoto')}}/{{Auth::user()->company->cover_photo}}" width="100"
+                    <img src="{{asset('uploads/coverphoto')}}/{{$company->cover_photo}}" width="100"
                          style="width: 100%" alt="">
                 @endif
 
                 <div class="company-desc">
                     <br>
-                    @if(empty(Auth::user()->company->logo))
+                    @if(empty($company->logo))
                         <img src="{{asset('avatar/avatar.jpg')}}"  width="100" alt="">
                     @else
-                        <img src="{{asset('uploads/logo')}}/{{Auth::user()->company->logo}}" width="100" alt="">
+                        <img src="{{asset('uploads/logo')}}/{{$company->logo}}" width="100" alt="">
                     @endif
                     <p>{{ $company->description }}</p>
                     <h1>{{$company->cname}}</h1>

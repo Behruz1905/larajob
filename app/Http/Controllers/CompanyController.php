@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\Job;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -19,6 +20,7 @@ class CompanyController extends Controller
 
     public function index($id, Company $company)
     {
+        $jobs = Job::where('user_id',$id)->get();
         return view('company.index',compact('company'));
     }
 

@@ -15,12 +15,14 @@ class JobController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('employer', ['except' => ['index','show','apply']]);
+        $this->middleware('employer', ['except' => ['index','show','apply','allJobs']]);
     }
     public function  index()
     {
-        $jobs = Job::all();
-        return view('welcome', compact('jobs'));
+        $jobs = Job::latest()->limit(10)->where('status',1)->get();
+       // $companies = Company::latest()->limit(12)->get(); axirinci 12 isi getiri
+        $companies = Company::get()->random(12);
+        return view('welcome', compact('jobs','companies'));
     }
 
     public  function show($id, Job $job)
@@ -86,6 +88,28 @@ class JobController extends Controller
     {
         $applicants = Job::has('users')->where('user_id',auth()->user()->id)->get();
         return view('jobs.applicants', compact('applicants'));
+    }
+
+    public function allJobs(Request $request)
+    {
+        $keyword = $request->get('title');
+        $type = $request->get('type');
+        $category = $request->get('category_id');
+        $address = $request->get('address');
+       
+            if($keyword || $type || $category || $address){
+          // dd($keyword ."-".$type."-".$category."-".$address);
+            $jobs = Job::where('title','LIKE','%'.$keyword.'%')
+                        ->orWhere('type',$type)
+                        ->orWhere('category_id',$category)
+                        ->orWhere('address',$address)
+                        ->paginate(10);
+        }else{
+            $jobs = Job::latest()->paginate(10);
+        }
+
+
+        return view('jobs.alljobs',compact('jobs'));
     }
 
 

@@ -23,6 +23,7 @@ Route::get('/jobs/applications','JobController@applicant')->name('applicants');
 Route::get('/jobs/alljobs','JobController@allJobs')->name('alljobs');
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/jobs/{id}/{job}', 'JobController@show')->name('jobs.show');

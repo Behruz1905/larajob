@@ -15,7 +15,7 @@ class JobController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('employer', ['except' => ['index','show','apply','allJobs']]);
+        $this->middleware(['employer','verified'], ['except' => ['index','show','apply','allJobs']]);
     }
     public function  index()
     {
@@ -96,7 +96,7 @@ class JobController extends Controller
         $type = $request->get('type');
         $category = $request->get('category_id');
         $address = $request->get('address');
-       
+
             if($keyword || $type || $category || $address){
           // dd($keyword ."-".$type."-".$category."-".$address);
             $jobs = Job::where('title','LIKE','%'.$keyword.'%')

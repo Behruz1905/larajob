@@ -46,3 +46,11 @@ Route::post('/employer/register', 'EmployerRegisterController@employerRegister')
 
 Route::post('applications/{id}','JobController@apply')->name('apply');
 
+
+Route::post('/save/{id}', 'FavouriteController@saveJob');
+Route::post('/unsave/{id}', 'FavouriteController@unSaveJob');
+
+
+//Search
+Route::get('/jobs/search', 'JobController@searchJobs');
+

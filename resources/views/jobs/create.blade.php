@@ -77,6 +77,64 @@
                                     </span>
                                     @enderror
                                 </div>
+
+                        <div class="form-group">
+                            <label for="number_of_vacancy">No of vacancy:</label>
+                            <input type="text" id="number_of_vacancy"
+                                   name="number_of_vacancy"
+                                   class="form-control @error('number_of_vacancy') is-invalid @enderror"
+                                   value="{{ old('number_of_vacancy') }}">
+                            @error('number_of_vacancy')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Year of experience:</label>
+                            <input type="text" id="experience"
+                                   name="experience"
+                                   class="form-control @error('experience') is-invalid @enderror"
+                                   value="{{ old('experience') }}">
+                            @error('experience')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select name="gender" id="gender" class="form-control">
+                                <option value="any">Any</option>
+                                <option value="male">Any</option>
+                                <option value="female">Any</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salary">Salary:</label>
+                            <select name="salary" id="salary" class="form-control">
+                                <option value="negotiable">Negotiable</option>
+                                <option value="1000-1500">1000-1500</option>
+                                <option value="1500-1800">1500-1800</option>
+                                <option value="1800-2000">1800-2000</option>
+                                <option value="2000-2500">2000-2500</option>
+                                <option value="2500-3000">2500-3000</option>
+                                <option value="female">Any</option>
+                            </select>
+                        </div>
+
+
+
+
+
+
+
+
+
                                 <div class="form-group">
                                     <label for="type">Type:</label>
                                     <select name="type" id="type" class="form-control">

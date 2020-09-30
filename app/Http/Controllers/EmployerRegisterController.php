@@ -32,7 +32,9 @@ class EmployerRegisterController extends Controller
 
 
 
-        return redirect()->to('login')->with('message','Please verify your email by clicking the link sent to your email
+        return redirect()->back()
+                         ->with('message','A verification link is sent to your email.
+                         Please verify your email by clicking the link sent to your email
         address');
     }
 }

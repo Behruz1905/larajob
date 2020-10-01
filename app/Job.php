@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Job extends Model
 {
     protected $fillable = ['user_id','company_id','title','slug','description','roles','category_id', 'position','address','type',
-        'status', 'last_date'];
+        'status', 'last_date','number_of_vacancy','experience','salary', 'gender'];
     public  function  getRouteKeyName()
     {
         return 'slug';

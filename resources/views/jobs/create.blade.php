@@ -109,8 +109,8 @@
                             <label for="gender">Gender:</label>
                             <select name="gender" id="gender" class="form-control">
                                 <option value="any">Any</option>
-                                <option value="male">Any</option>
-                                <option value="female">Any</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
                             </select>
                         </div>
 
@@ -123,16 +123,9 @@
                                 <option value="1800-2000">1800-2000</option>
                                 <option value="2000-2500">2000-2500</option>
                                 <option value="2500-3000">2500-3000</option>
-                                <option value="female">Any</option>
+                                <option value="3000+">3000+</option>
                             </select>
                         </div>
-
-
-
-
-
-
-
 
 
                                 <div class="form-group">

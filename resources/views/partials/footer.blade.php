@@ -60,7 +60,7 @@
     </div>
 </footer>
 </div>
-
+<script defer src="{{ asset('js/app.js') }}" ></script>
 <script src="{{asset('external/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('external/js/jquery-migrate-3.0.1.min.js')}}"></script>
 <script src="{{asset('external/js/jquery-ui.js')}}"></script>

@@ -14,7 +14,7 @@ class CompanyController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['employer','verified'], ['except' => ['index']]);
+        $this->middleware(['employer','verified'], ['except' => ['index','company']]);
     }
 
 
@@ -73,6 +73,12 @@ class CompanyController extends Controller
             return redirect()->back()->with('message', 'Company logo updated Successfully updated!');
         }
 
+    }
+
+    public function company()
+    {
+        $companies = Company::paginate(12);
+        return view('company.companies',compact('companies'));
     }
 
 }

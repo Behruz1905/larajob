@@ -6,7 +6,7 @@
                 v-if="show"
                 type="submit"
                 class="btn btn-success"
-                style="width:100%">Apply
+                style="width: 150px">Apply
             </button>
 
             <div v-else class="alert alert-success">

@@ -5,15 +5,15 @@
                 <button
                     v-if="!show"
                     @click.prevent="save()"
-                    class="btn btn-primary"
-                    style="width:100%">Save
+                    class="btn btn-warning"
+                    style="width:150px">Save
                 </button>
 
         <button
             v-else
             @click.prevent="unsave()"
             class="btn btn-dark"
-            style="width:100%">Unsave
+            style="width:150px">Unsave
         </button>
 
     </div>

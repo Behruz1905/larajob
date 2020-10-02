@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <div class="row"style="margin-top: 100px">
+        <div class="row">
 
             <form action="{{ route('alljobs') }}">
                 <div class="form-inline">
@@ -24,51 +24,46 @@
                         <select name="category_id" id="category" class="form-control">
                             <option value="">-select-</option>
                             @foreach(App\Category::all() as $cat)
-                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
 
-                        </select>&nbsp;&nbsp;
+                    </select>&nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                         <label for="title">address&nbsp;</label>
                         <input type="text" name="address" class="form-control">&nbsp;&nbsp;
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-outline-success">Search</button>
+                    <button type="submit" class="btn btn-outline-success">Search</button>
                     </div>
                 </div>
             </form>
 
-
+            <h1>Recent Jobs</h1>
             <table class="table">
                 <thead>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
 
                 </thead>
                 <tbody>
-                @if(count($jobs)> 0)
                 @foreach( $jobs as $job)
-                    <tr>
-                        <td><img src="{{asset('uploads/logo')}}/{{ $job->company->logo }}"  width="80" alt=""></td>
-                        <td>position : {{$job->position}}
-                            <br>
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;{{$job->type}}
-                        </td>
-                        <td><i class="fa fa-map-marker" aria-hidden="true"></i>Address: {{$job->address}}</td>
-                        <td><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Date: {{$job->created_at->diffForHumans()}} </td>
-                        <td>
-                            <a href="{{route('jobs.show', [$job->id, $job->slug])}}">
+                        <tr>
+                            <td><img src="{{asset('uploads/logo')}}/{{ $job->company->logo }}"  width="80" alt=""></td>
+                            <td>position : {{$job->position}}
+                                <br>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;{{$job->type}}
+                            </td>
+                            <td><i class="fa fa-map-marker" aria-hidden="true"></i>Address: {{$job->address}}</td>
+                            <td><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Date: {{$job->created_at->diffForHumans()}} </td>
+                            <td>
+                                <a href="{{route('jobs.show', [$job->id, $job->slug])}}">
                                 <button class="btn btn-success btn-sm">Apply</button></a></td>
-                    </tr>
-                @endforeach
-                    @else
-                    <td>No jobs found</td>
-
-                    @endif
+                        </tr>
+                 @endforeach
                 </tbody>
 
 

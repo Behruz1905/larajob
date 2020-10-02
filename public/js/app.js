@@ -37704,7 +37704,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success",
-              staticStyle: { width: "100%" },
+              staticStyle: { width: "150px" },
               attrs: { type: "submit" }
             },
             [_vm._v("Apply\n        ")]
@@ -37789,8 +37789,8 @@ var render = function() {
       ? _c(
           "button",
           {
-            staticClass: "btn btn-primary",
-            staticStyle: { width: "100%" },
+            staticClass: "btn btn-warning",
+            staticStyle: { width: "150px" },
             on: {
               click: function($event) {
                 $event.preventDefault()
@@ -37804,7 +37804,7 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-dark",
-            staticStyle: { width: "100%" },
+            staticStyle: { width: "150px" },
             on: {
               click: function($event) {
                 $event.preventDefault()

@@ -20,9 +20,10 @@ class JobController extends Controller
     public function  index()
     {
         $jobs = Job::latest()->limit(10)->where('status',1)->get();
+        $categories = Category::with('jobs')->get();
        // $companies = Company::latest()->limit(12)->get(); axirinci 12 isi getiri
         $companies = Company::get()->random(12);
-        return view('welcome', compact('jobs','companies'));
+        return view('welcome', compact('jobs','companies','categories'));
     }
 
     public  function show($id, Job $job)
@@ -96,6 +97,19 @@ class JobController extends Controller
 
     public function allJobs(Request $request)
     {
+
+        $search = $request->get('search');
+        $address = $request->get('address');
+        if($search && $address){
+            $jobs = Job::where('position','LIKE','%'.$search.'%')
+                ->orWhere('title','LIKE','%'.$search.'%')
+                ->orWhere('type','LIKE','%'.$search.'%')
+                ->orWhere('address','LIKE','%'.$search.'%')
+                ->paginate(10);
+            return view('jobs.alljobs',compact('jobs'));
+        }
+
+
         $keyword = $request->get('title');
         $type = $request->get('type');
         $category = $request->get('category_id');

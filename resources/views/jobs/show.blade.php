@@ -3,6 +3,19 @@
 @section('content')
     <div class="site-section bg-light">
         <div class="container">
+
+            @if(Session::has('message'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('message') }}
+                                    </div>
+            @endif
+
+            @if(Session::has('err_message'))
+                                    <div class="alert alert-danger">
+                                        {{ Session::get('err_message') }}
+                                    </div>
+            @endif
+
             <div class="row">
 
                 <div class="col-md-12 col-lg-8 mb-5">
@@ -44,7 +57,7 @@
 
 
                         <div class="p-4 mb-8 bg-white">
-                            <h3 class="h5 text-black mb-3">Description</h3>
+                            <h3 class="h5 text-black mb-3">Description <a href="#" data-toggle="modal" data-target="#emailModal" ><i class="fa fa-envelope-square" style="font-size:34px;float:right;color:green"></i></a></h3>
                             <p>{{$job->description}}</p>
                         </div>
                         <div class="p-4 mb-8 bg-white">
@@ -83,6 +96,53 @@
                             ></favorite-component>
                         @endif
                         </p>
+
+
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="emailModalLabel">Send job to your friend</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <form action="{{ route('mail') }}" method="POST">@csrf
+                                        <div class="modal-body">
+                                            <input type="hidden" name="job_id" value="{{ $job->id }}">
+                                            <input type="hidden" name="job_slug" value="{{ $job->slug }}">
+
+                                            <div class="form-group">
+                                                <label for="your_name">Your name *</label>
+                                                <input type="text" name="your_name" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="your_email">Your email *</label>
+                                                <input type="email" name="your_email" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="friend_name">Friend name *</label>
+                                                <input type="text" name="friend_name" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="friend_email">Friend email *</label>
+                                                <input type="email" name="friend_email" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Mail this job</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>

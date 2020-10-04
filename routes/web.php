@@ -59,3 +59,6 @@ Route::get('/jobs/search', 'JobController@searchJobs');
 //category jobs
 Route::get('/category/{id}/jobs', 'CategoryController@index')->name('category.jobs');
 
+//email
+Route::post('/job/mail', 'EmailController@send')->name('mail');
+

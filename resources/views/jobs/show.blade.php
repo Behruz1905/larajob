@@ -16,6 +16,16 @@
                                     </div>
             @endif
 
+            @if(isset($errors) && count($errors)>0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
+
             <div class="row">
 
                 <div class="col-md-12 col-lg-8 mb-5">
@@ -84,19 +94,29 @@
                             <p>{{$job->salary}}</p>
                         </div>
                         <div class="p-4 mb-8 bg-white">
-                        <p>
-                        @if(Auth::check() && Auth::user()->user_type=='seeker')
+                            <p>
+                            @if(Auth::check() && Auth::user()->user_type=='seeker')
 
-                            @if(! $job->checkApplication())
-                                <apply-component :jobid={{$job->id}}></apply-component>
+                                @if(! $job->checkApplication())
+                                    <apply-component :jobid={{$job->id}}></apply-component>
+                                @endif
+                                <br>
+                                <favorite-component :jobid={{$job->id}}
+                                    :favorited={{$job->checkSaved()?'true':'false'}}
+                                ></favorite-component>
                             @endif
-                            <br>
-                            <favorite-component :jobid={{$job->id}}
-                                :favorited={{$job->checkSaved()?'true':'false'}}
-                            ></favorite-component>
-                        @endif
-                        </p>
-
+                            </p>
+                        </div>
+                        @foreach($jobRecommendations as $recommend)
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <p class="badge badge-success">{{$recommend->type}}</p>
+                                <h5 class="card-title">{{$recommend->position}}</h5>
+                                <p class="card-text">{{Str::limit($recommend->description,90)}}</p>
+                                <center><a href="{{route('jobs.show',[$recommend->id,$recommend->slug])}}" class="btn btn-success">Apply</a></center>
+                            </div>
+                        </div>
+                        @endforeach
 
 
 
@@ -132,18 +152,19 @@
                                                 <input type="email" name="friend_email" class="form-control" required>
                                             </div>
                                         </div>
-                                    </form>
+
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Mail this job</button>
                                     </div>
+                                    </form>
                                 </div>
                                 </div>
                             </div>
 
 
 
-                        </div>
+
                     </div>
                 </div>
 
@@ -152,6 +173,7 @@
 
                     <div class="p-4 mb-3 bg-white">
                         <h3 class="h5 text-black mb-3">Short Info</h3>
+                        <p>Company name: {{$job->company->cname}}</p>
                         <p>Address: {{$job->address}}</p>
                         <p>Employment type: {{$job->type}}</p>
                         <p>Position: {{$job->position}}</p>

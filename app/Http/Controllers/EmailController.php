@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendJob;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
 
         public function send(Request $request)
         {
+
+            $this->validate($request, [
+                'your_name' => 'required|string',
+                'your_email' => 'required|email',
+                'friend_name' => 'required|string',
+                'friend_email'=> 'required|email'
+            ]);
+            //dd("dfdfdf");
             $homeUrl = url('/'); //localhost:8000
             $jobId = $request->get('job_id');
             $jobSlug = $request->get('job_slug');

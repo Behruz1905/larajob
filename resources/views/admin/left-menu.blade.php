@@ -4,9 +4,8 @@
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item"><a href="">Home</a></li>
-            <li class="list-group-item"><a href="">Home</a></li>
-            <li class="list-group-item"><a href="">Home</a></li>
+            <li class="list-group-item"><a href="/dashboard">Home</a></li>
+            <li class="list-group-item"><a href="/dashboard/create">Create post</a></li>
 
         </ul>
     </div>

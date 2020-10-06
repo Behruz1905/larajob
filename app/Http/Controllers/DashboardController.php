@@ -11,7 +11,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $posts = Post::paginate(20);
+        return view('admin.index', compact('posts'));
     }
 
     public function create()

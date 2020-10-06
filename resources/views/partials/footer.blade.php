@@ -82,7 +82,7 @@
     $( function() {
         $( "#datepicker" ).datepicker();
     } );
-</script>
+</scriptgit>
 
 
 <script>

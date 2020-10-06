@@ -64,17 +64,14 @@
                                 </li>
                             @endif
                         @else
-                            <li>
-                                <a href="{{route('job.create')}}">
-                                    <button class="btn btn-secondary">
-                                        Post a job
-                                    </button></a>
-                            </li>
+
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if(Auth::user()->user_type == 'employer')
                                         {{ Auth::user()->company->cname }}
+                                    @elseif(Auth::user()->user_type == 'employer')
+                                        {{Auth::user()->name}}
                                     @else
                                         {{ Auth::user()->name }}
                                     @endif
@@ -91,13 +88,14 @@
                                         <a class="dropdown-item" href="{{ route('applicants') }}">
                                             {{ __('Applicants') }}
                                         </a>
-                                    @else
+                                    @elseif(Auth::user()->user_type == 'seeker')
                                         <a class="dropdown-item" href="/user/profile">
                                             {{ __('Profile') }}
                                         </a>
                                         <a class="dropdown-item" href="/home">
                                             {{ __('My Saved Jobs') }}
                                         </a>
+                                    @else
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

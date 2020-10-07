@@ -9,6 +9,7 @@
             <li class="list-group-item"><a href="/dashboard/trash">Trash</a></li>
             <li class="list-group-item"><a href="/testimonial/">View Testimonial</a></li>
             <li class="list-group-item"><a href="/testimonial/create">Create Testimonial</a></li>
+            <li class="list-group-item"><a href="/dashboard/jobs">View Jobs</a></li>
         </ul>
     </div>
 </div>

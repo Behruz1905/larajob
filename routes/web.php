@@ -75,6 +75,8 @@ Route::get('/dashboard/trash', 'DashboardController@trash')->name('post.trash')-
 Route::get('/dashboard/{id}/trash', 'DashboardController@restore')->name('post.restore')->middleware('admin');
 Route::get('/dashboard/{id}/toggle', 'DashboardController@toggle')->name('post.toggle')->middleware('admin');
 Route::get('/posts/{id}/{slug}', 'DashboardController@show')->name('post.show');
+Route::get('/dashboard/jobs', 'DashboardController@getAllJobs')->middleware('admin');
+Route::get('/dashboard/{id}/jobs', 'DashboardController@toggleStatusJob')->name('job.status')->middleware('admin');
 
 //testimonial
 Route::get('testimonial', 'TestimonialController@index')->middleware('admin');

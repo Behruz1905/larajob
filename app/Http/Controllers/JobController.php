@@ -12,7 +12,7 @@ use App\Category;
 use App\Company;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
-
+use \stdClass;
 
 class JobController extends Controller
 {
@@ -26,9 +26,9 @@ class JobController extends Controller
         $categories = Category::with('jobs')->get();
        // $companies = Company::latest()->limit(12)->get(); axirinci 12 isi getiri
         $posts = Post::where('status',1)->get();
-        $testimonial = Testimonial::orderBy('id','DESC')->first();
+        $testimonial  = Testimonial::orderBy('id','DESC')->first();
         $companies = Company::get()->random(12);
-        return view('welcome', compact('jobs','companies','categories','posts'));
+        return view('welcome', compact('jobs','companies','categories','posts','testimonial'));
     }
 
     public  function show($id, Job $job)

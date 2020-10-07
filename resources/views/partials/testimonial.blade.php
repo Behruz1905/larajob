@@ -4,7 +4,7 @@
             <div class="col-md-6 mb-5 mb-md-0">
 
                 <div class="img-border">
-                    <a href="https://vimeo.com/{{$testimonial->video_id}}" class="popup-vimeo image-play">
+                    <a href="https://vimeo.com/{{ $testimonial->video_id }}" class="popup-vimeo image-play">
                   <span class="icon-wrap">
                     <span class="icon icon-play"></span>
                   </span>

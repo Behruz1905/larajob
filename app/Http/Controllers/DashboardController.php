@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
@@ -106,6 +107,20 @@ class DashboardController extends Controller
    {
        $post = Post::find($id);
        return view('admin.read',compact('post'));
+   }
+
+   public function getAllJobs()
+   {
+       $jobs = Job::latest()->paginate(20);
+       return view('admin.job',compact('jobs'));
+   }
+
+   public function toggleStatusJob($id)
+   {
+        $job = Job::find($id);
+        $job->status = !$job->status;
+        $job->save();
+        return redirect()->back()->with('message','Status updated successfully');
    }
 
 

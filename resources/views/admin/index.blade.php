@@ -37,21 +37,21 @@
                             <td>{{ Str::limit($post->content,20) }}</td>
                             <td>
                                 @if($post->status == '0')
-                                 <a href="" class="badge badge-primary">Draft</a>
+                                 <a href="{{route('post.toggle',[$post->id])}}" class="badge badge-primary">Draft</a>
                                 @else
-                                <a href="" class="badge badge-success">Live</a>
+                                <a href="{{route('post.toggle',[$post->id])}}" class="badge badge-success">Live</a>
                                 @endif
                             </td>
                             <td>{{ $post->created_at->diffForHumans() }}</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <a href="{{route('post.edit',[$post->id])}}"><button class="btn btn-primary">Edit</button></a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{$post->id}}">
                                    Delete
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -65,6 +65,7 @@
                                         </div>
                                         <form action="{{ route('post.delete') }}" method="POST">@csrf
                                             <div class="modal-footer">
+                                                <input type="hidden" name="id" value="{{$post->id}}">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Delete</button>
                                             </div>

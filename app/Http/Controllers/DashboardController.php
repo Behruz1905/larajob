@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(20);
+        $posts = Post::latest()->paginate(20);
         return view('admin.index', compact('posts'));
     }
 
@@ -40,6 +40,73 @@ class DashboardController extends Controller
             return redirect('/dashboard')->with('message','Post created successfully');
         }
     }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        return view('admin.edit',compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'title' => 'required|min:3',
+            'content' => 'required',
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        if(!$request->hasFile('image')){
+            $post->update($request->all());
+        }else{
+            $file = $request->file('image');
+            $path = $file->store('uploads', 'public');
+            Post::where('id',$id)->update([
+                'title'=>$title=$request->get('title'),
+                'content' => $request->get('content'),
+                'image'=>$path,
+                'status' => $request->get('status')
+            ]);
+        }
+        return redirect()->back()->with('message','Post updated  successfully');
+
+    }
+
+
+
+    public function destroy(Request $request)
+    {
+        $id = $request->get('id');
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->back()->with('message','Post deleted successfully');
+   }
+
+   public function trash()
+   {
+       $posts = Post::onlyTrashed()->paginate(20);
+       return view('admin.trash',compact('posts'));
+   }
+
+   public function restore($id)
+   {
+       Post::onlyTrashed()->where('id',$id)->restore();
+       return redirect()->back()->with('message','Post restored successfully');
+   }
+
+   public function toggle($id)
+   {
+        $post = Post::find($id);
+        $post->status = !$post->status;
+        $post->save();
+       return redirect()->back()->with('message','Status updated successfully');
+   }
+
+   public function show($id)
+   {
+       $post = Post::find($id);
+       return view('admin.read',compact('post'));
+   }
 
 
 }

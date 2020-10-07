@@ -68,5 +68,15 @@ Route::get('/dashboard/create', 'DashboardController@create')->middleware('admin
 
 Route::post('/dashboard/create', 'DashboardController@store')->name('post.store')->middleware('admin');
 Route::post('/dashboard/destroy', 'DashboardController@destroy')->name('post.delete')->middleware('admin');
+Route::get('/dashboard/{id}/edit', 'DashboardController@edit')->name('post.edit')->middleware('admin');
+Route::post('/dashboard/{id}/edit', 'DashboardController@update')->name('post.update')->middleware('admin');
 
+Route::get('/dashboard/trash', 'DashboardController@trash')->name('post.trash')->middleware('admin');
+Route::get('/dashboard/{id}/trash', 'DashboardController@restore')->name('post.restore')->middleware('admin');
+Route::get('/dashboard/{id}/toggle', 'DashboardController@toggle')->name('post.toggle')->middleware('admin');
+Route::get('/posts/{id}/{slug}', 'DashboardController@show')->name('post.show');
 
+//testimonial
+Route::get('testimonial', 'TestimonialController@index')->middleware('admin');
+Route::get('testimonial/create', 'TestimonialController@create')->middleware('admin');
+Route::post('testimonial/create', 'TestimonialController@store')->name('testimonial.store')->middleware('admin');

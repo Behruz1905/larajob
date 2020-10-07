@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\JobPostRequest;
@@ -10,6 +11,8 @@ use App\Job;
 use App\Category;
 use App\Company;
 use Illuminate\Support\Facades\Auth;
+use App\Post;
+
 
 class JobController extends Controller
 {
@@ -22,8 +25,10 @@ class JobController extends Controller
         $jobs = Job::latest()->limit(10)->where('status',1)->get();
         $categories = Category::with('jobs')->get();
        // $companies = Company::latest()->limit(12)->get(); axirinci 12 isi getiri
+        $posts = Post::where('status',1)->get();
+        $testimonial = Testimonial::orderBy('id','DESC')->first();
         $companies = Company::get()->random(12);
-        return view('welcome', compact('jobs','companies','categories'));
+        return view('welcome', compact('jobs','companies','categories','posts'));
     }
 
     public  function show($id, Job $job)

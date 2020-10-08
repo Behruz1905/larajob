@@ -16,10 +16,18 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        $adminRole = Auth::user()->roles()->pluck('name');
-        if($adminRole->contains('admin')){
-            return $next($request);
+        if(Auth::check()){  //logini yoxlayiriq
+
+            $adminRole =  Auth::user()->roles()->pluck('name');
+            if($adminRole->contains('admin')){   // login olanin admin olmasini yoxlayiriq
+                return $next($request);
+            }else{
+                return redirect('/');
+            }
         }
+
+        return redirect('/');
+
 
     }
 }
